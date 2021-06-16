@@ -5,7 +5,7 @@ import userEvent from "@testing-library/user-event"
 import Posts from "./Posts"
 
 
-it("Posts components should load without crashing", () => {
+it("Posts component should load without crashing", () => {
     const { getByText } = render(<Posts/>)
     expect(getByText("Loading...")).toBeInTheDocument()
 })
