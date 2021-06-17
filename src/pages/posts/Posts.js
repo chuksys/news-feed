@@ -1,5 +1,6 @@
 import React, { useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
+import { fetchUser } from "../../redux/user"
 import { loadPosts } from "../../redux/posts"
 import Post from "../../components/post/Post"
 import { pollPosts } from "../../redux/newPostsCount"
@@ -10,6 +11,10 @@ const Posts = () => {
     const { posts, isLoading } = state
     
     const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(fetchUser())
+    }, [dispatch])
 
     useEffect(() => {
         dispatch(pollPosts())

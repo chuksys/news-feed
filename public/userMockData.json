@@ -1,0 +1,23 @@
+{
+    "user" : {
+        "id": 1,
+        "likesCount": 0,
+        "commentsCount": 2,
+        "comments": [
+            {
+                "commentId": "1234567890",
+                "postId": 1,
+                "postTitle": "This is the title for post one",
+                "body": "comment 1",
+                "date": "2021/16/06"
+            },
+            {
+                "commentId": "2345678901",
+                "postId": 2,
+                "postTitle": "This is the title for post two",
+                "body": "comment 1",
+                "date": "2021/16/06"
+            }
+        ]
+    }
+}
