@@ -1,0 +1,47 @@
+{
+    "posts": [
+        {
+            "id": 1,
+            "uid": 2,
+            "title": "This is the title for post one",
+            "description": "This is the desc for post one",
+            "likesCount": 0,
+            "comments": [
+                {
+                    "id": "1234567890",
+                    "uid": 1,
+                    "body": "comment 1",
+                    "date": "2021/16/06"
+                },
+                {
+                    "id": "9876543210",
+                    "uid": 2,
+                    "body": "comment 2",
+                    "date": "2021/16/06"
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "uid": 1,
+            "title": "This is the title for post two",
+            "description": "This is the desc for post two",
+            "likesCount": 0,
+            "comments": [
+                {
+                    "id": "2345678901",
+                    "uid": 1,
+                    "body": "comment 1",
+                    "date": "2021/16/06"
+                },
+                {
+                    "id": "3412567890",
+                    "uid": 2,
+                    "body": "comment 2",
+                    "date": "2021/16/06"
+                }
+            ]
+        }
+        
+    ]
+}
