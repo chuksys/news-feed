@@ -1,7 +1,8 @@
 import React from "react"
-import { useSelector, useDispatch } from "react-redux"
-import { likePost } from "../../redux/postsReducer"
-
+import { useDispatch } from "react-redux"
+import { likePost } from "../../redux/posts"
+import AddComment from "../add_comment/AddComment"
+import Comments from "../comments/Comments"
 
 const Post = (props) => {
 
@@ -12,10 +13,10 @@ const Post = (props) => {
     }
 
     const style = {
-        border: "1px solid",
+        border: "1px solid #E5E5E5",
         display: "flex",
         flexDirection: "column",
-        width: "80%",
+        width: "40%",
         marginLeft: "auto",
         marginRight: "auto",
         padding: 12
@@ -31,6 +32,9 @@ const Post = (props) => {
             </button>
             <h1>{props.post.title}</h1>
             <p>{props.post.description}</p>
+
+            <AddComment postId = {props.post.id} postTitle = {props.post.title}/>
+            <Comments comments = {props.post.comments}/>
 
         </div>
     )
