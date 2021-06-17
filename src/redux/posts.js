@@ -1,26 +1,32 @@
 import ACTIONS from "../actions"
-import { increaseNewPostsCount } from "./newPostsCount"
 import { showLoader, hideLoader } from "./loading"
+import { increaseNewPostsCount } from "./newPostsCount"
 
 const { 
     LOAD_POSTS,
     LIKE_POST,
     COMMENT_ON_POST } = ACTIONS
 
+export const createGetRequestForPosts = () => {
+    return new Request("http://localhost:5000/postsMockData.json", {
+        method: "GET", 
+        headers: {
+            "Content-Type": "application/json"
+        }, 
+        mode: "cors", 
+        cache: "default"
+    })
+}
+
 
 export const loadPosts = () => (dispatch, getState) => {
-    dispatch(showLoader())
 
-    const request = new Request("http://localhost:5000/postsMockData.json", {
-          method: "GET", 
-          headers: {
-          "Content-Type": "application/json"
-          }, 
-          mode: "cors", 
-          cache: "default"
-        })
-        
-        fetch(request)
+        if(getState().newPostsCount !== 0 &&
+        getState().newPostsCount === getState().posts.length) return
+
+        dispatch(showLoader())
+
+        fetch(createGetRequestForPosts())
         .then(response => {
             if(response.ok) {
                 return response;
@@ -31,44 +37,32 @@ export const loadPosts = () => (dispatch, getState) => {
         .then(response => response.json())
         .then(data => {
             dispatch(hideLoader())
-            //dispatch(increaseNewPostsCount(data.posts.length))
-            if(data.posts.length !== getState().newPostsCount) {
-                dispatch({
-                    type: "LOAD_POSTS",
-                    payload: data.posts
-                })
-            }
+            dispatch(increaseNewPostsCount(data.posts.length))
+            dispatch({
+                type: "LOAD_POSTS",
+                payload: data.posts
+            })
+            
         })
         .catch(err => console.error(err))
-    
-    /* setTimeout(() => {
-        dispatch(hideLoader())  
-              dispatch({
-                  type: LOAD_POSTS,
-                  payload: posts
-              })
-    }, 3000) */
 }
 
-export const likePost = (postId) => (dispatch, getState) => {
-    setTimeout(() => {  
-        dispatch({
-            type: LIKE_POST,
-            payload: postId
-        })
-    }, 0)
+export const likePost = postId => dispatch => { 
+    //api call to update post in backend goes here 
+    dispatch({
+        type: LIKE_POST,
+        payload: postId
+    })
 }
 
-export const commentOnPost = (postId, commentObjs, setComment) => (dispatch, getState) => {
+export const commentOnPost = (postId, commentObjs, setComment) => dispatch => {
+    //api call to update post comment in backend goes here
     setComment("")
-    setTimeout(() => {  
-        dispatch({
-            type: COMMENT_ON_POST,
-            payload: {postId, commentObjs}
-        })
-    }, 0)
+    dispatch({
+        type: COMMENT_ON_POST,
+        payload: {postId, commentObjs}
+    })
 }
-
 
 const postsReducer = (posts = [], action) => {
         switch(action.type) {

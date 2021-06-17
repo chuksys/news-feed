@@ -20,7 +20,7 @@ const Posts = () => {
     }, [dispatch])
     
 
-    const showPosts = () => {
+    const showPosts = React.useCallback(() => {
         return isLoading ? <h2 style={{textAlign: "center"}}>Loading...</h2> :
         posts.map(post => (
             <Post 
@@ -28,11 +28,11 @@ const Posts = () => {
             post={post}
             />
           ))
-    }
+    }, [posts, isLoading])
 
     return(
         <div style={{margin: 40}}>
-            {showPosts()} 
+            {React.useMemo(() => showPosts(), [showPosts])} 
         </div> 
     )
 }

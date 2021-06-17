@@ -30,7 +30,7 @@ const Post = (props) => {
                 style={{width: 60, display: "flex", flexDirection: "row-reverse"}}>
                 Like
             </button>
-            <h1>{props.post.title}</h1>
+            <h3>{props.post.title}</h3>
             <p>{props.post.description}</p>
 
             <AddComment postId = {props.post.id} postTitle = {props.post.title}/>

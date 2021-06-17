@@ -1,17 +1,22 @@
 import React, { useEffect, useRef } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { loadPosts } from "../../redux/posts"
+import { syncUserStats } from "../../redux/user"
 
 const Stats = () => {
 
     const state = useSelector(state => state)
-    const { user, newPostsCount } = state
-    const newPostsCountRef = useRef(newPostsCount)
+    const { user, newPostsCount, posts } = state
     const reloadButtonRef = useRef(null)
+
+    useEffect(() => {
+        return syncUserStats()
+    }, [])
     
     useEffect(() => {
-        return newPostsCount > newPostsCountRef.current ? showReloadButton() : null
-    }, [newPostsCount])
+        return newPostsCount > posts.length ? showReloadButton() 
+        :  hideReloadButton()
+    }, [newPostsCount, posts])
 
     const dispatch = useDispatch()
 
