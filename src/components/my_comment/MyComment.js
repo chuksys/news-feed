@@ -1,6 +1,11 @@
-import React from "react"
+import React, { useEffect } from "react"
+import { syncUserComments } from "../../redux/user"
 
 const MyComment = (props) => {
+
+    useEffect(() => {
+        return syncUserComments()
+    }, [])
 
     const style = {
         border: "1px solid #E5E5E5",

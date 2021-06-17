@@ -1,19 +1,11 @@
 import ACTIONS from "../actions"
+import { createGetRequestForPosts } from "./posts"
 
 const { INCREASE_NEW_POSTS_COUNT } = ACTIONS
 
 export const pollPosts = () => (dispatch, getState) => {
     setTimeout(() => {
-        const request = new Request("http://localhost:5000/postsMockData.json", {
-          method: "GET", 
-          headers: {
-          "Content-Type": "application/json"
-          }, 
-          mode: "cors", 
-          cache: "default"
-        })
-        
-        fetch(request)
+        fetch(createGetRequestForPosts())
         .then(response => {
             if(response.ok) {
                 dispatch(pollPosts())
@@ -38,29 +30,6 @@ export const increaseNewPostsCount = (newCount) => {
         type: "INCREASE_NEW_POSTS_COUNT",
         payload: newCount
     }
-}
-
-const getInitialPostsCount = () => {
-    const request = new Request("http://localhost:5000/postsMockData.json", {
-          method: "GET", 
-          headers: {
-          "Content-Type": "application/json"
-          }, 
-          mode: "cors", 
-          cache: "default"
-        })
-        
-        return fetch(request)
-        .then(response => {
-            if(response.ok) {
-                return response;
-            } else {
-              throw Error(`${response.status} => ${response.statusText}`)  
-            }
-        })
-        .then(response => response.json())
-        .then(data => data.posts.length)
-        .catch(err => console.error(err))
 }
 
 const newPostsCount = (newPostsCount = 0, action) => {

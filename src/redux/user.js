@@ -1,9 +1,21 @@
 import ACTIONS from "../actions"
 import { user } from "../mockData"
 
-const { 
-    LIKE_POST,
-    COMMENT_ON_POST } = ACTIONS
+const { LIKE_POST, COMMENT_ON_POST } = ACTIONS
+
+export const syncUserStats = () => (dispatch, getState) => {
+    setTimeout(() => {
+        //api call to update user stats in backend
+        dispatch(syncUserStats())
+    }, 4000)
+}
+
+export const syncUserComments = () => (dispatch, getState) => {
+    setTimeout(() => {
+        //api call to update user comments in backend
+        dispatch(syncUserComments())
+    }, 4000)
+}
 
 
 const userReducer = (state = user, action) => {
