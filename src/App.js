@@ -1,11 +1,20 @@
-import './App.css';
+import React, { useEffect } from "react"
+import { useDispatch } from "react-redux"
+import { fetchUser } from "./redux/user"
 import Stats from "./components/stats/Stats"
 import Posts from "./pages/posts/Posts"
 import MyComments from "./pages/my_comments/MyComments"
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"
 
+import './App.css';
+
 
 function App() {
+  
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(fetchUser())
+}, [dispatch])
 
   return (
     <div className="App">
